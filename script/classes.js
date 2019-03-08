@@ -1,3 +1,5 @@
+ 'use strict';
+
 //Create Class Human 
 class Human{
 	constructor(gender){
@@ -24,5 +26,5 @@ class Person extends Human{
 }
  
  //creating a Person Object 
-const person=new Person();
+var person=new Person();
 console.log('print person Name : '+ person.getName()+ ' Gended : '+person.getGender());
