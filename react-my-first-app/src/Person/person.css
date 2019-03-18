@@ -10,10 +10,11 @@ button{
 }
 .Person{
     width: 25%;
-    margin: auto;
+    height: 300px;
+    margin: 10px;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     padding : 16px;
     text-align: center;
-    display: inline-block;
+    display: inline-table;
 }
