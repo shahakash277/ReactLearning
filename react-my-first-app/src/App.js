@@ -43,31 +43,33 @@ class App extends Component {
      })
   }
   render() {
+    let person =null;
+    if(this.state.showPerson){
+      person = (
+        <div>
+          <Person
+            name={this.state.Person[0].name}
+            age={this.state.Person[0].age}
+          />
+          <Person
+            name={this.state.Person[1].name}
+            age={this.state.Person[1].age}
+            click={this.switchNameHandler.bind(this, 'bbb')}
+            changed={this.nameChangedHandler}>My hobbies: Gamming, Coding</Person>
+          <Person
+            name={this.state.Person[2].name}
+            age={this.state.Person[2].age}
+          />
+        </div>
+      )
+    }
     return (
       <div className="App">
         <header className="App-header">
           <h1>Hi, I am new to React App.</h1>
           {/*Avoid Using below pattern in calling function instend use this.switchNameHandler.bind(this,'bbb')*/}
           <button onClick={this.togglePersonHandler}>{this.state.titleName}</button>
-          {
-            this.state.showPerson ?
-              <div>
-                <Person
-                  name={this.state.Person[0].name}
-                  age={this.state.Person[0].age}
-                />
-                <Person
-                  name={this.state.Person[1].name}
-                  age={this.state.Person[1].age}
-                  click={this.switchNameHandler.bind(this, 'bbb')}
-                  changed={this.nameChangedHandler}>My hobbies: Gamming, Coding</Person>
-                <Person
-                  name={this.state.Person[2].name}
-                  age={this.state.Person[2].age}
-                />
-              </div>
-            : null
-          }
+          {person}
         </header>
       </div>
     );
