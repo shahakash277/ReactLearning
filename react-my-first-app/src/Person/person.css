@@ -1,0 +1,19 @@
+button{
+    width: 300px;
+    height: 70px;
+    color: chocolate;
+    background-color: white;
+    font: inherit;
+    border: 1px solid blue;
+    padding: 8px;
+    cursor: pointer;
+}
+.Person{
+    width: 25%;
+    margin: auto;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding : 16px;
+    text-align: center;
+    display: inline-block;
+}

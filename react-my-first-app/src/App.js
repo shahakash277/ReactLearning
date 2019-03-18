@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Person/person.css';
 import Person from './Person/Person';
 class App extends Component {
   state={
@@ -9,11 +10,7 @@ class App extends Component {
       {name:'xyz',age:26}
     ]
   }
-   styles = {
-    width: '150px',
-    height: '50px',
-    
-  };
+   
   switchNameHandler =(newName)=>{
     console.log('was Clicked');
    //Don't do this this will not change value
@@ -23,12 +20,21 @@ class App extends Component {
      {name:'abc',age:24},
      {name:'xyz',age:26}]})
   }
-  render() {
+
+  nameChangedHandler=(event)=>{
+    this.setState({Person:[   
+      {name:'Akash',age:25},
+      {name:event.target.value,age:24},
+      {name:'xyz',age:26}]})
+  }
+  
+  render() {  
     return (
       <div className="App">
         <header className="App-header">
          <h1>Hi, I am new to React App.</h1>
-         <button style={this.styles} onClick={()=> this.switchNameHandler('aaa')}>Swich Name</button>
+         {/*Avoid Using below pattern in calling function instend use this.switchNameHandler.bind(this,'bbb')*/}
+         <button  onClick={()=> this.switchNameHandler('aaa')}>Swich Name</button>
          <Person 
             name={this.state.Person[0].name} 
             age={this.state.Person[0].age}
@@ -36,7 +42,8 @@ class App extends Component {
          <Person 
             name={this.state.Person[1].name} 
             age={this.state.Person[1].age}
-            click={this.switchNameHandler.bind(this,'bbb')}>My hobbies: Gamming, Coding</Person>
+            click={this.switchNameHandler.bind(this,'bbb')}
+            changed={this.nameChangedHandler}>My hobbies: Gamming, Coding</Person>
          <Person  
             name={this.state.Person[2].name} 
             age={this.state.Person[2].age}

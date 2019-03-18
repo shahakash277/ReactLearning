@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
+import './person.css';
 
 const person=(props)=>{
     return (
-        <div>
-          <button onClick={props.click}>Change Value</button>
+        <div className="Person">
+          <button  className="button" onClick={props.click}>Change Value</button>
             <p>My name is {props.name} and My age is {props.age} years</p>
             <p>{props.children}</p>
+            <input type='text' onChange={props.changed} value={props.name}></input>
         </div>
         )
 }
