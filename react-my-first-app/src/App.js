@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './Person/person.css';
 import Person from './Person/Person';
-import { throws } from 'assert';
+
 class App extends Component {
   state = {
     Person: [
@@ -15,7 +15,6 @@ class App extends Component {
   }
 
   switchNameHandler = (newName) => {
-    console.log('was Clicked');
     //Don't do this this will not change value
     // this.state.Person[0].name='pqr'; 
     this.setState({
@@ -36,32 +35,24 @@ class App extends Component {
   }
   togglePersonHandler=()=>{
     const doesState=this.state.showPerson;
-    console.log(doesState);
     this.setState({
       showPerson:!doesState,
       titleName: doesState ? "Show Person": "Hide Person"
      })
   }
   render() {
-    let person =null;
+    let persons =null;
     if(this.state.showPerson){
-      person = (
+      persons = (
         <div>
-          <Person
-            name={this.state.Person[0].name}
-            age={this.state.Person[0].age}
-          />
-          <Person
-            name={this.state.Person[1].name}
-            age={this.state.Person[1].age}
-            click={this.switchNameHandler.bind(this, 'bbb')}
-            changed={this.nameChangedHandler}>My hobbies: Gamming, Coding</Person>
-          <Person
-            name={this.state.Person[2].name}
-            age={this.state.Person[2].age}
-          />
+          {this.state.Person.map(person => {
+            return <Person
+              name={person.name}
+              age={person.age}
+            />
+          })}
         </div>
-      )
+      );
     }
     return (
       <div className="App">
@@ -69,7 +60,7 @@ class App extends Component {
           <h1>Hi, I am new to React App.</h1>
           {/*Avoid Using below pattern in calling function instend use this.switchNameHandler.bind(this,'bbb')*/}
           <button onClick={this.togglePersonHandler}>{this.state.titleName}</button>
-          {person}
+          {persons}
         </header>
       </div>
     );
