@@ -17,4 +17,5 @@ button{
     padding : 16px;
     text-align: center;
     display: inline-table;
+    max-width: 700px;
 }

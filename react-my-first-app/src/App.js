@@ -6,26 +6,31 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     Person: [
-      { name: 'Akash Shah', age: 25 },
-      { name: 'abc', age: 24 },
-      { name: 'xyz', age: 26 }
+      { id:'1', name: 'Akash Shah', age: 25 },
+      { id:'2', name: 'abc', age: 24 },
+      { id:'3', name: 'xyz', age: 26 }
     ],
     showPerson : false,
     titleName:"Show Person" 
   }
 
   deletePersonHandler=(index)=>{
-    const persons=this.state.Person;
+    //don't use const persons=this.state.Person because of reference is shared
+    //below line create a copy of object
+    const persons=[...this.state.Person];
     persons.splice(index,1);
     this.setState({Person:persons});
   }
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event,id) => {
+    const personIndex= this.state.Person.findIndex(p=> p.id===id);
+    const person= {...this.state.Person[personIndex]};
+    person.name=event.target.value
+    
+    const persons=[...this.state.Person];
+    persons[personIndex]=person;
     this.setState({
-      Person: [
-        { name: 'Akash', age: 25 },
-        { name: event.target.value, age: 24 },
-        { name: 'xyz', age: 26 }]
+      Person: persons
     })
   }
   togglePersonHandler=()=>{
@@ -45,6 +50,8 @@ class App extends Component {
               name={person.name}
               age={person.age}
               click={()=>this.deletePersonHandler(index)}
+              key={person.id}
+              changed={(event)=>this.nameChangedHandler(event,person.id)}
             />
           })}
         </div>
