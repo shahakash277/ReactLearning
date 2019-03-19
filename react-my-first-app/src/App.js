@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './Person/person.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -41,17 +42,34 @@ class App extends Component {
      })
   }
   render() {
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'blue',
+      }
+    };
     let persons =null;
     if(this.state.showPerson){
+      style[':hover'] = {
+        backgroundColor: 'red',
+        color: 'black',
+      }
       persons = (
-        <div> 
-          {this.state.Person.map((person,index) => {
+        <div>
+          {this.state.Person.map((person, index) => {
             return <Person
+              style={style}
               name={person.name}
               age={person.age}
-              click={()=>this.deletePersonHandler(index)}
+              click={() => this.deletePersonHandler(index)}
               key={person.id}
-              changed={(event)=>this.nameChangedHandler(event,person.id)}
+              changed={(event) => this.nameChangedHandler(event, person.id)}
             />
           })}
         </div>
@@ -71,4 +89,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
