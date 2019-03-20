@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './Person/person.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium,{StyleRoot} from 'radium';
 
 class App extends Component {
   state = {
@@ -52,6 +52,9 @@ class App extends Component {
       ':hover': {
         backgroundColor: 'lightgreen',
         color: 'blue',
+      },
+      '@media (min-width: 700px)':{
+        width:'450px'
       }
     };
     let persons =null;
@@ -76,6 +79,8 @@ class App extends Component {
       );
     }
     return (
+      //when you use media query that time styleRoot is important
+      <StyleRoot>
       <div className="App">
         <header className="App-header">
           <h1>Hi, I am new to React App.</h1>
@@ -84,6 +89,7 @@ class App extends Component {
           {persons}
         </header>
       </div>
+      </StyleRoot>
     );
     // React.createElement('div',null,React.createElement('h1',{className:'App-header'},'Hi, I am new to React App.'))
   }
