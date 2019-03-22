@@ -3,6 +3,7 @@ import './App.css';
 import './Person/person.css';
 import Person from './Person/Person';
 import Radium,{StyleRoot} from 'radium';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -66,7 +67,7 @@ class App extends Component {
       persons = (
         <div>
           {this.state.Person.map((person, index) => {
-            return <Person
+            return <ErrorBoundary key={person.id}><Person
               style={style}
               name={person.name}
               age={person.age}
@@ -74,21 +75,26 @@ class App extends Component {
               key={person.id}
               changed={(event) => this.nameChangedHandler(event, person.id)}
             />
+            </ErrorBoundary>
           })}
         </div>
       );
     }
+    const random=Math.random();
+    if( random >0.7){
+      throw new Error("someting wrong");
+    }
     return (
       //when you use media query that time styleRoot is important
       <StyleRoot>
-      <div className="App">
-        <header className="App-header">
-          <h1>Hi, I am new to React App.</h1>
-          {/*Avoid Using below pattern in calling function instend use this.switchNameHandler.bind(this,'bbb')*/}
-          <button onClick={this.togglePersonHandler}>{this.state.titleName}</button>
-          {persons}
-        </header>
-      </div>
+        <div className="App">
+          <header className="App-header">
+            <h1>Hi, I am new to React App.</h1>
+            {/*Avoid Using below pattern in calling function instend use this.switchNameHandler.bind(this,'bbb')*/}
+            <button onClick={this.togglePersonHandler}>{this.state.titleName}</button>
+            {persons}
+          </header>
+        </div>
       </StyleRoot>
     );
     // React.createElement('div',null,React.createElement('h1',{className:'App-header'},'Hi, I am new to React App.'))
