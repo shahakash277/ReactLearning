@@ -80,10 +80,10 @@ class App extends Component {
         </div>
       );
     }
-    const random=Math.random();
-    if( random >0.7){
-      throw new Error("someting wrong");
-    }
+    // const random=Math.random();
+    // if( random >0.7){
+    //   throw new Error("someting wrong");
+    // }
     return (
       //when you use media query that time styleRoot is important
       <StyleRoot>
