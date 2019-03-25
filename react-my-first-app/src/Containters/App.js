@@ -3,7 +3,7 @@ import './App.css';
 import './Person/person.css';
 import Person from './Person/Person';
 import Radium,{StyleRoot} from 'radium';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
