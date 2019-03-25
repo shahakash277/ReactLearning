@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import './Person/person.css';
-import Person from './Person/Person';
+import '../Components/Persons/Person/person.css';
 import Radium,{StyleRoot} from 'radium';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-
+import Persons from '../Components/Persons/Persons'
+import Cockpit from '../Components/Cockpit/cockpit'
 class App extends Component {
   state = {
     Person: [
@@ -43,58 +42,22 @@ class App extends Component {
      })
   }
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'blue',
-      },
-      '@media (min-width: 700px)':{
-        width:'450px'
-      }
-    };
-    let persons =null;
-    if(this.state.showPerson){
-      style[':hover'] = {
-        backgroundColor: 'red',
-        color: 'black',
-      }
-      persons = (
-        <div>
-          {this.state.Person.map((person, index) => {
-            return <ErrorBoundary key={person.id}><Person
-              style={style}
-              name={person.name}
-              age={person.age}
-              click={() => this.deletePersonHandler(index)}
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-            />
-            </ErrorBoundary>
-          })}
-        </div>
-      );
-    }
-    // const random=Math.random();
-    // if( random >0.7){
-    //   throw new Error("someting wrong");
-    // }
+   
     return (
       //when you use media query that time styleRoot is important
       <StyleRoot>
         <div className="App">
           <header className="App-header">
-            <h1>Hi, I am new to React App.</h1>
-            {/*Avoid Using below pattern in calling function instend use this.switchNameHandler.bind(this,'bbb')*/}
-            <button onClick={this.togglePersonHandler}>{this.state.titleName}</button>
-            {persons}
-          </header>
+          <Cockpit click={this.togglePersonHandler} titleName={this.state.titleName} />
+          {this.state.showPerson ?
+            <Persons
+              persons={this.state.Person}
+              click={this.deletePersonHandler}
+              changed={this.nameChangedHandler}
+            /> : null}
+        </header>
         </div>
+
       </StyleRoot>
     );
     // React.createElement('div',null,React.createElement('h1',{className:'App-header'},'Hi, I am new to React App.'))
