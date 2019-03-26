@@ -5,16 +5,29 @@ import Radium,{StyleRoot} from 'radium';
 import Persons from '../Components/Persons/Persons'
 import Cockpit from '../Components/Cockpit/cockpit'
 class App extends Component {
-  state = {
-    Person: [
-      { id:'1', name: 'Akash Shah', age: 25 },
-      { id:'2', name: 'abc', age: 24 },
-      { id:'3', name: 'xyz', age: 26 }
-    ],
-    showPerson : false,
-    titleName:"Show Person" 
+
+  constructor(props){
+    super(props);
+    console.log('[Apps.js] '+ props)  
+   
+    this.state = {
+      Person: [
+        { id:'1', name: 'Akash Shah', age: 25 },
+        { id:'2', name: 'abc', age: 24 },
+        { id:'3', name: 'xyz', age: 26 }
+      ],
+      showPerson : false,
+      titleName:"Show Person" 
+    }
   }
 
+  componentWillMount(){
+    console.log('[App.js] inside component will mount')
+  }
+componentDidMount(){
+  console.log('[App.js] inside component Did mount')
+
+}
   deletePersonHandler=(index)=>{
     //don't use const persons=this.state.Person because of reference is shared
     //below line create a copy of object
@@ -42,7 +55,7 @@ class App extends Component {
      })
   }
   render() {
-   
+   console.log('[App.js] render inside')
     return (
       //when you use media query that time styleRoot is important
       <StyleRoot>
